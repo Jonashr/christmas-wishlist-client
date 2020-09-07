@@ -1,0 +1,70 @@
+/* styles */
+/* called by your view template */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  margin: 3rem;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p {
+  max-width: 600px;
+}
+
+input, textarea {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 300px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+button {
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: yellow;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid lightgrey;
+}
+
+.notification {
+  color: #EC0F48;
+  margin: 0.5rem 0;
+  padding: 0;
+  font-size: 1.2em;
+  word-break: break-all;
+  text-align: left;
+  }

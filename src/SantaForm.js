@@ -3,9 +3,27 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import ErrorMessage from './ErrorMessage'
+import { Container, Typography, Paper, TextField, Button, Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(5)
+  },
+  submit: {
+    marginTop: theme.spacing(1)
+  },
+  form: {
+    margin: '2rem 3rem'
+  },
+  formControl: {
+    marginBottom: theme.spacing(1)
+  }
+}))
 
 const SantaForm = ({ setError, setSuccess}) => {
   const { register, handleSubmit, errors} = useForm()
+  const classes = useStyles()
   const history = useHistory()
 
   const onSubmit = async(formData) => {
@@ -16,6 +34,7 @@ const SantaForm = ({ setError, setSuccess}) => {
 
     try {
       const response = await axios.post('/wishlist', request)
+      console.log('Response', response)
       if(response) {
         setSuccess(true)
         history.push('/success')
@@ -24,49 +43,66 @@ const SantaForm = ({ setError, setSuccess}) => {
       if(error.response.data.error) {
         if(error.response.status === 400) {
           // Older than 10 years
-          setError('残念ながら君はもう１０歳を超えていて、大きな子になってしまいましたので、サンタさんは君の願いを叶えません。')
+          setError('Unfortunately, santa will not grant the wishes for kids over 10 years. You are too old for writing wishlists to Santa.')
         } else if(error.response.status === 404) {
           // Not found
-          setError('ユーザは存在しません。もう一度ユーザー名を確認して、やり直してください。')
+          setError('This user does not exist. Please make sure that the name has been spelled correctly and try again.')
         } else {
           // Error besides those two occured, generic error message.
-          setError('エラーが発生しまいました。後ほどまたやり直してください。')
+          setError('An error occured. Please try again later.')
         }
       } else {
         // Didnt make it to the client
-        setError('申し訳ございませんがサンタさんはただいま大変忙しいので、サンタさんに連絡できませんでした。後ほどまたやり直してください。')
+        setError('An error occured when trying to send the wishlist to Santa Claus. Please try again later')
       }
       history.push('/error')
     }
   }
 
   return (
-    <>
-      <header>
-        <h1>
-          サンタさんへの手紙
-        </h1>
-      </header>
+    <Container component='main' maxWidth='sm'>
+      <Typography variant='h3' component='h1' align='center' color='primary'>A Letter to Santa</Typography>
   
-      <main>
-        <p className="bold">メリークリスマス! クリスマスは何が欲しいですか。自分の願いを書いてください！</p>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          お名前は？
-          <input name="username" placeholder="charlie.brown"　ref={register({required: true})}/>
+      <Paper variant='outlined' className={classes.paper}>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+          <Typography variant='subtitle1' component='h2'>Merry christmas! What do you wish for? Please write down your wish and let santa know what you want!</Typography>
+          <div>
+            <TextField 
+              fullWidth
+              className={classes.formControl}
+              variant='outlined'
+              name="username"
+              label='Your username'
+              placeholder="charlie.brown"
+              color="secondary"
+              error={errors.username ? true : false}　
+              inputRef={register({required: true, maxLength: 20})}
+            />
+          </div>
           <ErrorMessage error={errors.username} />
-          願い
-          <textarea name="wish" rows="10" cols="45" placeholder="世界平和、チーズケーキ、PS5" ref={register({ required: true, maxLength: 100})}></textarea>
+          <div>
+            <TextField 
+              name="wish"
+              fullWidth
+              variant='outlined'
+              label="Your Wish"
+              multiline
+              rows="6"  
+              className={classes.formControl}
+              error={errors.wish ? true : false}
+              placeholder="World Peace, Corona Virus Vaccine, Playstation 5"
+              color="secondary"
+              inputRef={register({ required: true, maxLength: 100})}>
+            </TextField>
+          </div>
           <ErrorMessage error={errors.wish} />
-          <br/>
-          <button type="submit">確定</button>
+          <Grid container justify="center">
+            <Button className={classes.submit} type="submit" variant='contained' color='primary'>Send your letter</Button>
+          </Grid>
         </form>
-      </main>
-  
-      <footer>
-        Made with
-        <a href="https://glitch.com">Glitch</a>!
-      </footer>
-    </>
+      </Paper>
+
+    </Container>
   )
 }
 

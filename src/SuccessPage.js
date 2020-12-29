@@ -24,7 +24,7 @@ const SuccessPage = () => {
           <Typography paragraph align='center'>If you have been a good kid this year...</Typography>
           <Typography paragraph align='center'>Your wish might just be granted!</Typography>
           <Grid container justify="center">
-            <Button variant='contained' component={Link} to='/' color='primary' align='center'>Return to Wishlist</Button>
+            <Button id='returnHome' variant='contained' component={Link} to='/' color='primary' align='center'>Return to Wishlist</Button>
           </Grid>
         </Paper>
       </div>

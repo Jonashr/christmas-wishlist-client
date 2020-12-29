@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { red, green } from '@material-ui/core/colors/'
 

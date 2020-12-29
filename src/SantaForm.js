@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const SantaForm = ({ setError, setSuccess}) => {
-  const { register, handleSubmit, errors} = useForm()
+const SantaForm = ({ setError, setSuccess }) => {
+  const { register, handleSubmit, errors } = useForm()
   const classes = useStyles()
   const history = useHistory()
 
@@ -62,12 +62,12 @@ const SantaForm = ({ setError, setSuccess}) => {
   return (
     <Container component='main' maxWidth='sm'>
       <Typography variant='h3' component='h1' align='center' color='primary'>A Letter to Santa</Typography>
-  
+
       <Paper variant='outlined' className={classes.paper}>
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <Typography variant='subtitle1' component='h2'>Merry christmas! What do you wish for? Please write down your wish and let santa know what you want!</Typography>
           <div>
-            <TextField 
+            <TextField
               fullWidth
               className={classes.formControl}
               variant='outlined'
@@ -75,29 +75,39 @@ const SantaForm = ({ setError, setSuccess}) => {
               label='Your username'
               placeholder="charlie.brown"
               color="secondary"
-              error={errors.username ? true : false}　
-              inputRef={register({required: true, maxLength: 20})}
+              id="username"
+              error={errors.username ? true : false}
+              inputRef={register({ required: true, maxLength: 20 })}
             />
           </div>
           <ErrorMessage error={errors.username} />
           <div>
-            <TextField 
+            <TextField
               name="wish"
               fullWidth
               variant='outlined'
               label="Your Wish"
               multiline
-              rows="6"  
+              rows="6"
               className={classes.formControl}
+              id="wish"
               error={errors.wish ? true : false}
               placeholder="World Peace, Corona Virus Vaccine, Playstation 5"
               color="secondary"
-              inputRef={register({ required: true, maxLength: 100})}>
+              inputRef={register({ required: true, maxLength: 100 })}>
             </TextField>
           </div>
           <ErrorMessage error={errors.wish} />
           <Grid container justify="center">
-            <Button className={classes.submit} type="submit" variant='contained' color='primary'>Send your letter</Button>
+            <Button
+              className={classes.submit}
+              id='wishSubmit'
+              type="submit"
+              variant='contained'
+              color='primary'
+            >
+              Send your letter
+            </Button>
           </Grid>
         </form>
       </Paper>

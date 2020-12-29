@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { Container, CssBaseline } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -24,33 +24,33 @@ const App = () => {
     <div className='App'>
       <Container component='main' className={classes.main} maxWidth={false}>
         <CssBaseline />
-          <Router>
-            <Route
-              exact path='/'
-              render={() =>
-                <SantaForm 
-                  setError={setError}
-                  setSuccess={setSuccess}
-                />
+        <Router>
+          <Route
+            exact path='/'
+            render={() =>
+              <SantaForm
+                setError={setError}
+                setSuccess={setSuccess}
+              />
             }
-            />
-            <Route
-              exact path='/error'
-              render={() => error !== null ?
-                <ErrorPage 
-                  error={error}
-                /> : <Redirect to='/' />
-              }
-            />
-            <Route exact path='/success'
-              render={() => success !== null ? 
-                <SuccessPage/> : <Redirect to='/' />
-              }
-            />
-          </Router>
-        </Container>
-      </div>
+          />
+          <Route
+            exact path='/error'
+            render={() => error !== null ?
+              <ErrorPage
+                error={error}
+              /> : <Redirect to='/' />
+            }
+          />
+          <Route exact path='/success'
+            render={() => success !== null ?
+              <SuccessPage/> : <Redirect to='/' />
+            }
+          />
+        </Router>
+      </Container>
+    </div>
   )
 }
 
-export default App;
+export default App

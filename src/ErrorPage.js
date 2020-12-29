@@ -29,7 +29,7 @@ const ErrorPage = ({ error }) => {
           <Typography variant='h4' component='h1' align='center' color='primary' gutterBottom>エラーが発生しました。</Typography>
           <Typography paragraph>{error}</Typography>
           <Grid container justify="center">
-            <Button variant='contained' component={Link} to='/' color='primary' align='center'>Return to Wishlist</Button>
+            <Button id='returnHome' variant='contained' component={Link} to='/' color='primary' align='center'>Return to Wishlist</Button>
           </Grid>
         </Paper>
       </div>
